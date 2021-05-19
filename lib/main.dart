@@ -3,7 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:login_signup/login.dart';
 import 'package:login_signup/signup.dart';
-import 'package:login_signup/forgotpassword.dart';
+import 'package:login_signup/imageupload.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -102,6 +102,28 @@ class HomePage extends StatelessWidget {
                     ),
                     child: Text(
                       "Sign up",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 18
+                      ),
+                    ),
+                  ),
+                    // defining image upload
+                  SizedBox(height:20),
+                  MaterialButton(
+                    minWidth: double.infinity,
+                    height: 60,
+                    onPressed: (){
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=> ImageUploadPage()));
+
+                    },
+                    color: Color(0xff0095FF),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(50)
+                    ),
+                    child: Text(
+                      "Image upload",
                       style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.w600,
