@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:login_signup/components/already_have_an_account_acheck.dart';
+import 'package:login_signup/components/forgotpassword.dart';
+import 'package:login_signup/signup.dart';
+import 'package:login_signup/forgot.dart';
 
 class LoginPage extends StatelessWidget {
   @override
@@ -92,19 +96,30 @@ class LoginPage extends StatelessWidget {
                 ),
 
 
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Text("Don't have an account?"),
-                    Text(" Sign up", style: TextStyle(
-                      fontWeight: FontWeight.w600,
-                      fontSize: 18,
-
-
-                    ),)
-                  ],
+                AlreadyHaveAnAccountCheck(
+                  press: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return SignupPage();
+                        },
+                      ),
+                    );
+                  },
                 ),
-
+                ForgotPassword(
+                  press: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return ForgotPage();
+                        },
+                      ),
+                    );
+                  },
+                ),
                 Container(
                   padding: EdgeInsets.only(top: 100),
                   height: 200,

@@ -1,9 +1,10 @@
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:login_signup/login.dart';
 import 'package:login_signup/signup.dart';
 import 'package:login_signup/imageupload.dart';
+
+
 
 void main() {
   runApp(MaterialApp(
@@ -37,31 +38,27 @@ class HomePage extends StatelessWidget {
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 30,
-
                     ),
-
                   ),
                   SizedBox(
                     height: 20,
                   ),
-                  Text("The Perfect Path ",
+                  Text(
+                    "The Perfect Path ",
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: Colors.grey[700],
                       fontSize: 15,
-
-                    ),)
+                    ),
+                  )
                 ],
               ),
               Container(
                 height: MediaQuery.of(context).size.height / 3,
                 decoration: BoxDecoration(
                     image: DecorationImage(
-                        image: AssetImage("assets/welcome.png")
-                    )
-                ),
+                        image: AssetImage("assets/welcome.png"))),
               ),
-
               Column(
                 children: <Widget>[
                   // the login button
@@ -69,75 +66,65 @@ class HomePage extends StatelessWidget {
                     minWidth: double.infinity,
                     height: 60,
                     onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage()));
-
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => LoginPage()));
                     },
                     // defining the shape
                     shape: RoundedRectangleBorder(
-                        side: BorderSide(
-                            color: Colors.black
-                        ),
-                        borderRadius: BorderRadius.circular(50)
-                    ),
+                        side: BorderSide(color: Colors.black),
+                        borderRadius: BorderRadius.circular(50)),
                     child: Text(
                       "Login",
-                      style: TextStyle(
-                          fontWeight: FontWeight.w600,
-                          fontSize: 18
-                      ),
+                      style:
+                          TextStyle(fontWeight: FontWeight.w600, fontSize: 18),
                     ),
                   ),
                   // creating the signup button
-                  SizedBox(height:20),
+                  SizedBox(height: 20),
                   MaterialButton(
                     minWidth: double.infinity,
                     height: 60,
-                    onPressed: (){
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=> SignupPage()));
-
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => SignupPage()));
                     },
                     color: Color(0xff0095FF),
                     shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(50)
-                    ),
+                        borderRadius: BorderRadius.circular(50)),
                     child: Text(
                       "Sign up",
                       style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.w600,
-                          fontSize: 18
-                      ),
+                          fontSize: 18),
                     ),
                   ),
-                    // defining image upload
-                  SizedBox(height:20),
+                  // defining image upload
+                  SizedBox(height: 20),
                   MaterialButton(
                     minWidth: double.infinity,
                     height: 60,
-                    onPressed: (){
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=> ImageUploadPage()));
-
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ImageUploadPage()));
                     },
                     color: Color(0xff0095FF),
                     shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(50)
-                    ),
+                        borderRadius: BorderRadius.circular(50)),
                     child: Text(
                       "Image upload",
                       style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.w600,
-                          fontSize: 18
-                      ),
+                          fontSize: 18),
                     ),
                   )
-
                 ],
               ),
-
-
-
-
             ],
           ),
         ),
@@ -145,4 +132,3 @@ class HomePage extends StatelessWidget {
     );
   }
 }
-

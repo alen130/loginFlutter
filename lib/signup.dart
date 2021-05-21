@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-
+import 'package:login_signup/components//already_have_an_account_acheck.dart';
+import 'package:login_signup/login.dart';
 class SignupPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -96,17 +97,19 @@ class SignupPage extends StatelessWidget {
 
 
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Text("Already have an account?"),
-                  Text(" Login", style:TextStyle(
-                      fontWeight: FontWeight.w600,
-                      fontSize: 18
-                  ),
-                  )
-                ],
-              )
+              AlreadyHaveAnAccountCheck(
+                login: false,
+                press: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return LoginPage();
+                      },
+                    ),
+                  );
+                },
+              ),
 
 
 
