@@ -1,6 +1,16 @@
+import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'dart:io' as Io;
+import 'package:http/http.dart' as http;
+import 'package:seeip_client/seeip_client.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+
+
+
+
 
 
 class ImageUploadPage extends StatelessWidget {
@@ -36,12 +46,15 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   File _image;
+  String uploadingimage;
   final picker = ImagePicker();
   Future getImage() async {
     final pickedFile = await picker.getImage(source: ImageSource.camera);
     setState(() {
       if (pickedFile != null) {
         _image = File(pickedFile.path);
+        settoblob(pickedFile.path);
+
       } else {
         print('No image selected.');
       }
@@ -52,6 +65,8 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() {
       if (pickedFile != null) {
         _image = File(pickedFile.path);
+        settoblob(pickedFile.path);
+
       } else {
         print('No image selected.');
       }
@@ -98,14 +113,82 @@ class _MyHomePageState extends State<MyHomePage> {
                 tooltip: "Pick Image from gallery",
                 child: Icon(Icons.file_upload),
                 heroTag: null,
-              )
-            ],
-          )
+              ),
+
+
+           ],
+          ),
+
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+
+              FloatingActionButton.extended(
+
+                onPressed: uploadImage,
+                tooltip: "upload image",
+                icon:Icon(Icons.save_outlined),
+                label:Text("save"),
+                heroTag: null,
+              ),
+
+                ]),
         ],
       ),
     );
   }
-}
+
+
+    Future<http.Response> uploadImage()async {
+      var seeip = SeeipClient();
+      var ipaddress = await seeip.getIP();
+      print(ipaddress);
+      final response=await http.post(
+        Uri.parse('https://roadmakergo.herokuapp.com/save_form'),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode(<String, String>{
+        'ipaddress':ipaddress.toString(),
+          'image':uploadingimage
+        }),
+      );
+      if (response.statusCode >= 200 && response.statusCode<= 300) {
+        Fluttertoast.showToast(
+            msg: "Uploaded Successfully",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.CENTER,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.blue,
+            textColor: Colors.white,
+            fontSize: 16.0
+        );
+        // If the server did return a 201 CREATED response,
+        // then parse the JSON.
+
+      } else {
+        // If the server did not return a 201 CREATED response,
+        // then throw an exception.
+        throw Exception('Failed to create album.');
+      }
+    }
+
+  Future<void> settoblob(String path) async {
+    final bytes = Io.File(path).readAsBytesSync();
+    base64Encode(List<int> bytes) => base64.encode(bytes);
+    uploadingimage=base64Encode(bytes);
+   /* SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('image', base64Encode(bytes));*/
+  }
+
+  /*getImageString() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return  prefs.getString('image');
+  }*/
+
+  }
+
+
 
 
 

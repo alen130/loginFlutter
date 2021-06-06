@@ -3,6 +3,7 @@ import 'package:login_signup/components/already_have_an_account_acheck.dart';
 import 'package:login_signup/components/forgotpassword.dart';
 import 'package:login_signup/signup.dart';
 import 'package:login_signup/forgot.dart';
+import 'package:postgres/postgres.dart';
 
 class LoginPage extends StatelessWidget {
   @override
@@ -75,7 +76,20 @@ class LoginPage extends StatelessWidget {
                     child: MaterialButton(
                       minWidth: double.infinity,
                       height: 60,
-                      onPressed: () {},
+                      onPressed: () async {
+                        var connection=await setConnection();
+                        List<List<dynamic>> results = await connection.query("SELECT * FROM auth_user ",
+
+                        );
+                        connection.close();
+                        for (final row in results) {
+                         /* var a = row[0];
+                          var b = row[1];*/
+                          print(row);
+
+                        }
+
+                      },
                       color: Color(0xff0095FF),
                       elevation: 0,
                       shape: RoundedRectangleBorder(
@@ -140,6 +154,10 @@ class LoginPage extends StatelessWidget {
     );
   }
 
+  Future setConnection() async {var connection = PostgreSQLConnection("34.93.43.244", 5432, "roadmakerDB", username: "postgres", password: "postgres");
+  await connection.open();
+  return connection;}
+
 }
 
 
@@ -180,4 +198,5 @@ Widget inputFile({label, obscureText = false})
       SizedBox(height: 10,)
     ],
   );
+
 }

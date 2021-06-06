@@ -1,8 +1,14 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:login_signup/dashboard.dart';
 import 'package:login_signup/login.dart';
 import 'package:login_signup/signup.dart';
 import 'package:login_signup/imageupload.dart';
+import 'package:login_signup/signupsample.dart';
+import 'package:login_signup/loginsample.dart';
+
+
+
 
 
 
@@ -19,6 +25,12 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: Container(
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage("assets/welcome.png"),
+                  fit: BoxFit.cover,
+                ),
+              ),
           // we will give media query height
           // double.infinity make it big as my parent allows
           // while MediaQuery make it big as per the screen
@@ -47,18 +59,19 @@ class HomePage extends StatelessWidget {
                     "The Perfect Path ",
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      color: Colors.grey[700],
-                      fontSize: 15,
+                      color: Colors.red,
+                      fontSize: 20,
+                      fontStyle: FontStyle.italic
                     ),
                   )
                 ],
               ),
-              Container(
+              /*Container(
                 height: MediaQuery.of(context).size.height / 3,
                 decoration: BoxDecoration(
                     image: DecorationImage(
                         image: AssetImage("assets/welcome.png"))),
-              ),
+              ),*/
               Column(
                 children: <Widget>[
                   // the login button
@@ -67,16 +80,17 @@ class HomePage extends StatelessWidget {
                     height: 60,
                     onPressed: () {
                       Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => LoginPage()));
+                          MaterialPageRoute(builder: (context) => LoginSamplePage()));
                     },
                     // defining the shape
-                    shape: RoundedRectangleBorder(
-                        side: BorderSide(color: Colors.black),
-                        borderRadius: BorderRadius.circular(50)),
+                     color: Colors.white,
+                      shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(50)),
                     child: Text(
                       "Login",
                       style:
-                          TextStyle(fontWeight: FontWeight.w600, fontSize: 18),
+                          TextStyle(fontWeight: FontWeight.w600, fontSize: 18,
+                          color: Colors.black),
                     ),
                   ),
                   // creating the signup button
@@ -88,7 +102,7 @@ class HomePage extends StatelessWidget {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => SignupPage()));
+                              builder: (context) => SignupSamplePage()));
                     },
                     color: Color(0xff0095FF),
                     shape: RoundedRectangleBorder(
@@ -111,6 +125,7 @@ class HomePage extends StatelessWidget {
                           context,
                           MaterialPageRoute(
                               builder: (context) => ImageUploadPage()));
+
                     },
                     color: Color(0xff0095FF),
                     shape: RoundedRectangleBorder(
@@ -122,7 +137,30 @@ class HomePage extends StatelessWidget {
                           fontWeight: FontWeight.w600,
                           fontSize: 18),
                     ),
-                  )
+                  ),
+                  /*SizedBox(height: 20),
+                  MaterialButton(
+                    minWidth: double.infinity,
+                    height: 60,
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => DashBoardPage()));
+
+                    },
+                    color: Color(0xff0095FF),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(50)),
+                    child: Text(
+                      "Dashboard",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 18),
+                    ),
+                  )*/
+
                 ],
               ),
             ],
